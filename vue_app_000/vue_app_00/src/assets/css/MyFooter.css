@@ -1,0 +1,203 @@
+/* 尾部 */
+footer{
+  width: 100%;
+  margin-top: 50px;
+}
+footer .footer-icon{
+  width: 100%;
+  height: 65px;
+  padding: 11px 0;
+  background-color: #3f3b3a;
+  color: #fff;
+}
+footer .core{
+  width: 1200px;
+  margin:0 auto;
+}
+footer .core ul li+li{
+  float: left;
+  width: 25%;
+  padding-left: 5%;
+}
+footer .core ul li i{
+  float: left;
+  width: 45px;
+  height: 45px;
+  background: url(../image/images/footer_sprites.png) 0 0/101px 101px no-repeat;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+footer .core ul li i.icon2{
+  background: url(../image/images/footer_sprites.png) 0 0/101px 101px no-repeat;
+  background-position: 0px -57px;
+}
+footer .core ul li i.icon3{
+  background: url(../image/images/footer_sprites.png) 0 0/101px 101px no-repeat;
+  background-position: -58px -57px;
+}
+footer .core ul li i.icon4{
+  background: url(../image/images/footer_sprites.png) 0 0/101px 101px no-repeat;
+  background-position: -58px 2px;
+}
+footer .core ul li strong{
+  display: block;
+  height: 20px;
+  font-size: 16px;
+  font-weight: 900;
+  margin-top: 2px;
+  font-size: 16px;
+}
+footer .core ul li p{
+  font-size: 8px;
+  color: #fff;
+}
+footer .footer-message{
+  margin-top: 5px;
+  border-top: 2px solid #000;
+  background-color: #f6f7f7;
+}
+footer .footer-message .about-us{
+  padding: 15px 0 30px;
+} 
+footer .footer-message .about-us .about-us-left{
+  width: 13%;
+  margin: 30px 5% 0;
+  text-align: center;
+}
+footer .footer-message .about-us .about-us-left .tel{
+  font-size: 20px;
+  font-weight: 700;
+  color: #231815;
+}
+footer .footer-message .about-us .about-us-left .time{
+  font-size: 14px;
+  color: #231815;
+}
+footer .footer-message .about-us .about-us-left a{
+  display: inline-block;
+  width: 46%;
+  height: 24px;
+  line-height: 24px;
+  border-radius: 5px;
+  background: #e51f1d;
+  text-align: center;
+  color: #fff;
+  margin-top: 10px;
+  margin-left: 47px;
+  font-size: 8px;
+}
+footer .footer-message .about-us .about-us-center{
+  width:55%;
+}
+footer .footer-message .about-us .about-us-center dl{
+  text-align: center;
+  float: left;
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+}
+footer .footer-message .about-us .about-us-center dl dt{
+  line-height: 38px;
+  font-size: 14px;
+  font-weight: 900;
+  color: #595757;
+  width: 25%;
+}
+footer .footer-message .about-us .about-us-center dl dd{
+  line-height: 24px;
+  width: 25%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+footer .footer-message .about-us .about-us-center dl dd a{
+  color: #595757;
+  font-size: 8px;
+}
+footer .footer-message .about-us .about-us-center dl dd a:hover{
+  color: #f00;
+}
+footer .footer-message .about-us .about-us-right{
+  width:22%;
+}
+footer .footer-message .about-us .about-us-right div{
+  width: 50%;
+  text-align: center;
+}
+footer .footer-message .about-us .about-us-right div img{
+  width: 50%;
+  height: 50%;
+}
+footer .footer-message .about-us .about-us-right div p{
+  color: #595757;
+  text-align: left; 
+}
+footer .footer-message .about-us .about-us-right div span{
+  color: #b7a46c;
+  line-height: 1.2;
+}
+footer .footer-message .friendsLink{
+  width: 800px;
+  margin: 0 auto 10px;
+  display: flex;
+  flex-flow:row nowrap; 
+}
+footer .footer-message .friendsLink>p{
+  white-space: nowrap;
+}
+footer .footer-message .friendsLink .friends{
+  width:1400px;
+}
+footer .footer-message .friendsLink ul li{
+ margin-right: -10px;
+ width: 110px;
+ justify-content:space-around;
+ align-items: center;
+ font-size: 9px;
+ color: #595757;
+}
+footer .footer-message .company{
+  text-align: center;
+  margin-bottom: 20px;
+}
+footer .footer-message .company span,footer .footer-message .company a{
+  padding: 0 10px;
+  color: #595757;
+}
+footer .footer-message .copyright{
+  text-align: center;
+  padding-bottom: 15px;
+}
+footer .footer-message .copyright ul li{
+  float: left;
+  height: 30px;
+  margin-right: 50px;
+}
+footer .footer-message .copyright ul li img{
+  width: auto;
+  height: 30px;
+}
+footer .footer-message .copyright ul .licence{
+  margin-left: 340px;
+  margin-right: -100px;
+}
+footer .footer-message .copyright ul .auth{
+  margin-left: -141px;
+  margin-right: 20px;
+}
+footer .footer-message .copyright ul .police{
+  margin-left: -197px;
+  margin-right: -400px;
+}
+footer .footer-message .copyright ul .police img{
+  float: left;
+  width: auto;
+  
+}
+footer .footer-message .copyright ul .police p{
+  text-align: left;
+  margin-left: 80px;
+  color: #595757;
+  line-height: 15px;
+}
