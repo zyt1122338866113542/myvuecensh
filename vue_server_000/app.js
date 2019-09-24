@@ -214,6 +214,55 @@ server.get("/order",(req,res)=>{
 
 })
 
+//功能四：企业页面图片
+server.get("/qiye",(req,res)=>{
+  var sql = "SELECT img FROM censh_qiye_pic";
+  pool.query(sql,(err,result)=>{
+    if(err)throw err;
+    if(result.length==0){
+      res.send({code:-1,msg:"请求有误"})
+    }else{
+      res.send({code:1,msg:"请求成功",data:result});
+      console.log(result)
+    }
+  })
+})
+
+//功能五：浪琴红12页面图片
+server.get("/longinesred12",(req,res)=>{
+  var sql = "SELECT img FROM censh_longinesred12_pic";
+  pool.query(sql,(err,result)=>{
+    if(err)throw err;
+    if(result.length==0){
+      res.send({code:-1,msg:"请求有误"})
+    }else{
+      res.send({code:1,msg:"请求成功",data:result});
+      console.log(result)
+    }
+  })
+})
+
+不对---表建错了
+//功能六：将指定商品添加至购物车
+server.get("/addcard",(req,res)=>{
+  // var uid = req.session.uid;
+  // if(!uid){
+  //   res.send({code:-1,msg:"请先登录"});
+  // return;
+  // }
+  var sql = "SELECT img FROM censh_longinesred12_pic";
+  pool.query(sql,(err,result)=>{
+    if(err)throw err;
+    if(result.length==0){
+      res.send({code:-1,msg:"请求有误"})
+    }else{
+      res.send({code:1,msg:"请求成功",data:result});
+      console.log(result)
+    }
+  })
+})
+
+
 // //功能二:商品分页显示77~109
 // //1:接收客户请求 /product GET
 // // http://127.0.0.1:8

@@ -27,12 +27,14 @@
                         </div>
                         <div id="mask" v-show="show" :style="maskStyle"></div>
                         <div @mouseover="toggle" @mouseout="toggle" @mousemove="drag" id="super-mask"></div>
-                        <div id="div-lg" v-for="(item,i) of pics[0]" :key="i" v-show="show" :style="{backgroundUrl}"></div>   
+                        <div id="div-lg" v-show="show"
+                        
+                        ></div>   
                     </div>
                     <div class="thumbanil fl">
                             <ul class="clearfix" id="sm">
                                 <li v-for="(item,i) of pics[0]" :key="i" @click="changeone" >
-                                    <img :src=" `http://127.0.0.1:8080/`+ item.displayimg" alt=""
+                                    <img :src=" `http://127.0.0.1:8080/`+item.displayimg" alt=""
                                         :data-id="item.order_watch_id">
                                 </li>
                             </ul>
@@ -54,16 +56,15 @@ export default {
             i:1,
             show:false,
             maskStyle:{left:0, top:-112},
-            backgroundUrl:{
-                background:url('http://127.0.0.1:8080/image/order/9e238e44beb44f338a3ab6ceec185fc4X640.jpg')
-                
-            }
+            activeColor:'red'
+            
         }
     },
-    created() {
-        this.loadMore();
-    },
+   
     methods:{
+        created() {
+            this.loadMore();
+        },
         loadMore(){
             // 1.创建url地址
             var url = "order";
@@ -71,7 +72,7 @@ export default {
             this.axios.get(url).then(res=>{
                 //console.log(res);
                 this.pics = res.data.data; 
-                //console.log(this.pics)
+                console.log(this.pics)
                 })
         },
         // 完成展示表的切换
@@ -105,7 +106,7 @@ export default {
         },
         // computed:{
         //     gbPosition(){
-        //     return `${-parseInt(this.maskStyle.left)*20/9}px ${-parseInt(this.maskStyle.top)*20/9}px`;
+        //     return `${-parseInt(this.maskStyle.left)*3/2}px ${-parseInt(this.maskStyle.top)*3/2}px`;
         //     }
         // },
         

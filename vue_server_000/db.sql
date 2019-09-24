@@ -344,23 +344,56 @@ INSERT INTO censh_order_pic VALUES
 'image/order/雅典.jpg'),
 (NULL, 32, "","","","","",
 'image/order/雅克德罗.jpg');
+
+
+/*****企业页面的图片**********/
+CREATE TABLE censh_longinesred12_pic(
+  pid INT PRIMARY KEY AUTO_INCREMENT,
+  longinesred12_watch_id INT,
+  img VARCHAR(128)               #图片路径
+);
+INSERT INTO censh_longinesred12_pic VALUES
+(NULL, 1, 'image/detailslq/5c999735bdab4.jpg'),
+(NULL, 2, 'image/detailslq/5c91e53eaf737.jpg'),
+(NULL, 3, 'image/detailslq/5c32f0883c4f2.mp4'),
+(NULL, 4, 'image/detailslq/5c540237d3219.png'),
+(NULL, 5, 'image/detailslq/5c91e5818215c.jpg'),
+(NULL, 6, 'image/detailslq/5c91e608e98a7.jpg'),
+(NULL, 7, 'image/detailslq/5c91ec7675c58.jpg'),
+(NULL, 8, 'image/detailslq/5c32f0883c4f2.mp4'),
+(NULL, 9, 'image/detailslq/5c91ec91f03c0.jpg'),
+(NULL, 10, 'image/detailslq/5c91ec9e7b3fe.jpg'),
+(NULL, 11, 'image/detailslq/5c91ecd58a264.jpg'),
+(NULL, 12, 'image/detailslq/5c91ece00d725.mp4'),
+(NULL, 13, 'image/detailslq/5c91ecee77638.jpg'),
+(NULL, 14, 'image/detailslq/5c91ecfb19e8e.jpg');
+
+/*****Longinesred12页面的图片**********/
+CREATE TABLE censh_qiye_pic(
+  pid INT PRIMARY KEY AUTO_INCREMENT,
+  qiye_watch_id INT,
+  img VARCHAR(128)               #图片路径
+);
+INSERT INTO censh_qiye_pic VALUES
+(NULL, 1, 'image/details-qiyelipin/5c7cd3aedb98c.jpg'),
+(NULL, 2, 'image/details-qiyelipin/5c7cd4e132e69.jpg'),
+(NULL, 3, 'image/details-qiyelipin/5c7cd4f1ca3e8.jpg'),
+(NULL, 4, 'image/details-qiyelipin/5c7cd4fd76ee6.jpg'),
+(NULL, 5, 'image/details-qiyelipin/5c7cd510407ae.jpg'),
+(NULL, 6, 'image/details-qiyelipin/5c7cd5231e612.jpg'),
+(NULL, 7, 'image/details-qiyelipin/5c7cd536bff7c.jpg');
+
 /*****购物车*******/
 CREATE TABLE censh_shoppingcart(
   lid INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  user_id INT(11) default NULL,
-  product_id INT(11) default NULL,
-  count INT(11) default NULL,
-  is_checked TINYINT(1) default NULL
+  user_id INT(11),
+  product_id INT(11),
+  count INT(11),
+  is_checked TINYINT(1)
 );
 INSERT INTO censh_shoppingcart VALUES
-('1', '10', '17', '1', '0'),
-('2', '11', '11', '1', '0'),
-('3', '12', '1', '1', '1'),
-('4', '13', '3', '9', '0'),
-('5', '14', '1', '1', '0'),
-('13', '20', '1', '1', '1'),
-('14', '22', '17', '11', '1'),
-('15', '20', '28', '1', '0');
+(NULL, 1, 1, 1, 1),
+(NULL, 1, 2, 2, 0);
 
 /*****订单*******/
 CREATE TABLE censh_order(

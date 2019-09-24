@@ -20,7 +20,7 @@ main section.summary .summary-image{
 }
 main section.summary .thumbanil{
     width: 400px;
-    height: 70px;
+    height: 100px;
     
 }
 main section.summary .thumbanil ul{
@@ -31,17 +31,17 @@ main section.summary .thumbanil ul{
 }
 main section.summary .thumbanil ul li{
     box-sizing: border-box;
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
     cursor: pointer;
-    margin:2px;
+    /* margin:2px; */
     overflow: hidden;
     justify-content: space-around;
     align-items: center;
 }
 main section.summary .thumbanil ul li img{
-    width: 100%;
-    height: 100%;
+    width: 80px;
+    height: 80px;
 }
 main section.summary .summary-image .picture{
     width: 400px;
@@ -72,9 +72,10 @@ main section.summary .summary-image .picture ul li img{
 #div-lg{
     position: absolute;
     top: 0;left: 450px;
-    width:400px; height:400px;
+    width:600px; height:600px;
     z-index:1000;
     border: 1px solid rgba(0, 0, 0, 0.125);
+    background:url(http://127.0.0.1:8080/image/order/9e238e44beb44f338a3ab6ceec185fc4X640.jpg) no-repeat;
 } 
 main section.summary .summary-image p.tip{
     display: inline-block;
