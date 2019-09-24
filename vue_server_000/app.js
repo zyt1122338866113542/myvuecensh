@@ -62,14 +62,15 @@ server.get("/login",(req,res)=>{
    if(result.length==0){
      res.send({code:-1,msg:"用户名或密码有误"})
    }else{
-     //获取当前登录用户id
-     //result=[{id:2}]
-     //var id = result[0].id;
+     //获取当前登录用户uid
+      //result=[{uid:2}]
+     var id = result[0].uid;
      //将用户id保存session对象中
      //uid当前登录：用户凭证
-    //  req.session.uid = id;
-    //  console.log(req.session);
+      req.session.uid = id;
+      console.log(req.session);
      res.send({code:1,msg:"登录成功"});
+      console.log(result)
    }
   });
 });
@@ -242,23 +243,53 @@ server.get("/longinesred12",(req,res)=>{
   })
 })
 
-不对---表建错了
+
 //功能六：将指定商品添加至购物车
-server.get("/addcard",(req,res)=>{
-  // var uid = req.session.uid;
-  // if(!uid){
-  //   res.send({code:-1,msg:"请先登录"});
-  // return;
-  // }
-  var sql = "SELECT img FROM censh_longinesred12_pic";
-  pool.query(sql,(err,result)=>{
+//#此功能先行条件先登录
+//1:接收客户端请求 /addcart GET
+//http://127.0.0.1:8080/login?uname=tom&upwd=123
+//http://127.0.0.1:8080/addcart?lid=1&lname=kk&price=9
+server.get("/addcart",(req,res)=>{
+//2:判断当前用户是否登录成功
+//  uid
+//  如果uid为undefined 没登录
+var uid = req.session.uid;
+//console.log(uid)
+if(!uid){
+  res.send({code:-1,msg:"请先登录"});
+  return;
+}
+//3:获取客户端数据???小心处理
+//  lid    商品编号
+//  price  商品价格
+//  lname  商品名称
+  var lid = req.query.lid;
+  var price = req.query.price;
+  var lname = req.query.lname;
+  //4:创建查询sql:当前用户是否购买此商品
+  var sql = "SELECT id FROM censh_cart WHERE uid = ? AND lid = ? ";
+  //5:执行sql语句
+  pool.query(sql,[uid,lid],(err,result)=>{
     if(err)throw err;
+    //6:在回调函数中判断下一步操作
+    //  没购买过此商品  添加
+    //  己购买过此商品  更新
     if(result.length==0){
-      res.send({code:-1,msg:"请求有误"})
+     var sql = `INSERT INTO censh_cart VALUES(null,${lid},${uid},${price},'${lname}',1)`;
     }else{
-      res.send({code:1,msg:"请求成功",data:result});
-      console.log(result)
+     var sql = `UPDATE censh_cart SET count=count+1 WHERE uid=${uid} AND lid=${lid}`;
     }
+    //7:执行sql获取返回结果
+    pool.query(sql,(err,result)=>{
+      if(err)throw err;
+      //8:如果sql UPDATE INSERT DELETE
+      //判断执行成功 result.affectedRows 影响行数
+      if(result.affectedRows>0){
+       res.send({code:1,msg:"商品添加成功"});
+      }else{
+       res.send({code:-2,msg:"添加失败"}); 
+      }
+    })
   })
 })
 

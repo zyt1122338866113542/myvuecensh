@@ -273,7 +273,9 @@ INSERT INTO censh_longinesproduct_work_pic VALUES
 CREATE TABLE censh_order_pic(
   pid INT PRIMARY KEY AUTO_INCREMENT,
   order_watch_id INT,              #笔记本电脑编号
-  displayimg VARCHAR(128)            #展示图片路径
+  displayimg VARCHAR(128),            #展示图片路径
+  lname VARCHAR(128),               #商品的名字
+  price DECIMAL(10,2)
   -- detailimg VARCHAR(128),             #商品详情图片
   -- storyimg VARCHAR(128),              #商品故事图片
   -- storeimg VARCHAR(128),              #店铺图片
@@ -283,15 +285,15 @@ CREATE TABLE censh_order_pic(
 
 INSERT INTO censh_order_pic VALUES
 (NULL, 1, 
-'image/order/9e238e44beb44f338a3ab6ceec185fc4X640.jpg'),
+'image/order/9e238e44beb44f338a3ab6ceec185fc4X640.jpg',"浪琴",1000),
 (NULL, 2, 
-'image/order/LS4024AD背X640.jpg'),
+'image/order/LS4024AD背X640.jpg',"浪琴",1000),
 (NULL, 3, 
-'image/order/LS4024AD侧X640.jpg'),
+'image/order/LS4024AD侧X640.jpg',"浪琴",1000),
 (NULL, 4, 
-'image/order/LS4024AD扣X640.jpg'),
+'image/order/LS4024AD扣X640.jpg',"浪琴",1000),
 (NULL, 5, 
-'image/order/LS4024AD模X640.jpg');
+'image/order/LS4024AD模X640.jpg',"浪琴",1000);
 
 
 (NULL, 6, "",
@@ -383,6 +385,21 @@ INSERT INTO censh_qiye_pic VALUES
 (NULL, 6, 'image/details-qiyelipin/5c7cd5231e612.jpg'),
 (NULL, 7, 'image/details-qiyelipin/5c7cd536bff7c.jpg');
 
+
+/*******addcart************/
+CREATE TABLE censh_cart(
+  id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  lid INT(11),
+  uid INT(11),
+  price DECIMAL(10,2), 
+  lname varchar(128),
+  count INT(11)
+);
+INSERT INTO censh_cart VALUES
+(NULL,1,1,1000,"浪琴",1),
+(NULL,2,1,2000,"浪琴",1),
+(NULL,3,2,3000,"浪琴",1),
+(NULL,4,2,4000,"宝玑"1);
 /*****购物车*******/
 CREATE TABLE censh_shoppingcart(
   lid INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,

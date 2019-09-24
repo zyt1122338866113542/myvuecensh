@@ -77,15 +77,15 @@ main section.summary .summary-image .picture ul li img{
     border: 1px solid rgba(0, 0, 0, 0.125);
     background:url(http://127.0.0.1:8080/image/order/9e238e44beb44f338a3ab6ceec185fc4X640.jpg) no-repeat;
 } 
-main section.summary .summary-image p.tip{
-    display: inline-block;
+main section.summary p.tip{
+    display: block;
     margin: 28px 0 0 15%;
     font-size: 12px;
     color: #b2b2b2;
     line-height: 20px;
     border-bottom: none;
 }
-main section.summary .summary-image .icon360{
+main section.summary .icon360{
     width: 70px;
     height: 70px;
     float: right;

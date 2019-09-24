@@ -32,14 +32,16 @@
                         ></div>   
                     </div>
                     <div class="thumbanil fl">
-                            <ul class="clearfix" id="sm">
-                                <li v-for="(item,i) of pics[0]" :key="i" @click="changeone" >
-                                    <img :src=" `http://127.0.0.1:8080/`+item.displayimg" alt=""
-                                        :data-id="item.order_watch_id">
-                                </li>
-                            </ul>
-                        </div>
+                        <ul class="clearfix" id="sm">
+                            <li v-for="(item,i) of pics[0]" :key="i" @click="changeone" >
+                                <img :src=" `http://127.0.0.1:8080/`+item.displayimg" alt=""
+                                    :data-id="item.order_watch_id">
+                            </li>
+                        </ul>
+                    </div>
+                    
                 </section>
+                
             </main>
         </div>
         <my-footer></my-footer>
@@ -51,12 +53,13 @@ export default {
         return{
             breadcrumbs:["首页","表","浪琴","浪琴 Longines HERIAGE 经典复刻系列"],      //保存面包屑导航
             pics:[
-                {order_watch_id:1,displayimg:""}
+                {order_watch_id:1,displayimg:"",lname:"",price:""}
             ],                 //保存服务器返回的图片
             i:1,
             show:false,
             maskStyle:{left:0, top:-112},
-            activeColor:'red'
+            activeColor:'red',
+
             
         }
     },
