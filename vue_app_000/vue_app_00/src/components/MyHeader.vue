@@ -113,12 +113,13 @@ export default {
             list:[],    //保存服务器返回的牌子列表
             tabbarList:["全部品牌","选表购表","盛时奥莱","积分商城","定制&周边","海外产品","维修保养","线下门店","品牌馆","资讯","视频"],
             // 菜单导航的列表
-            kw:""  //利用双向绑定获得搜索文本框中用户输入的关键词
+            kw:1  //利用双向绑定获得搜索文本框中用户输入的关键词
         }
     },
     created() {
         this.loadMore();
-        this.kw=this.$route.params.kw;
+        //如果地址栏中已经有用户输入的关键词参数kw，则自动获取到搜索文本框中保持同步
+       // this.kw=this.$route.params.kw;
     },
     methods:{
         loadMore(){
@@ -132,7 +133,6 @@ export default {
         },
         // 搜索
         search(){
-            // this.$router.push("/longinesproduct")
             this.$router.push("/longinesproduct/"+this.kw)
             }
         },

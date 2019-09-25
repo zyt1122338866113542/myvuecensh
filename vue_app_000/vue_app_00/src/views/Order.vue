@@ -27,21 +27,176 @@
                         </div>
                         <div id="mask" v-show="show" :style="maskStyle"></div>
                         <div @mouseover="toggle" @mouseout="toggle" @mousemove="drag" id="super-mask"></div>
-                        <div id="div-lg" v-show="show"
-                        
+                        <div id="div-lg" v-show="show" v-for="(item,i) of pics[0]" :key="i"
+                        :style="{'background-image':`url(http://127.0.0.1:8080/${item.displayimg})`}"
                         ></div>   
                     </div>
                     <div class="thumbanil fl">
                         <ul class="clearfix" id="sm">
                             <li v-for="(item,i) of pics[0]" :key="i" @click="changeone" >
                                 <img :src=" `http://127.0.0.1:8080/`+item.displayimg" alt=""
-                                    :data-id="item.order_watch_id">
+                                    :data-id="item.lid">
                             </li>
                         </ul>
+                    </div> 
+                    <!-- <p class="tip">*产品图片仅供参考，请以实物为准</p> -->
+                    <img src="http://127.0.0.1:8080/image/order/360icon1.gif" class="icon360" alt="">
+                    <div class="summary-news">  
+                        <div class="title">
+                            品牌资讯 | NEWS
+                            <div class="more">
+                                <a href="">更多>></a>
+                            </div>
+                        </div>
+                        <ul>
+                            <li v-for="i of to" :key="i">
+                                <a href="">{{lilist}}</a>
+                            </li>
+                        </ul>
+                    </div> 
+                    <div class="summary-detail fl">
+                    <div class="title">
+                        <div class="title-brand">
+                            <img src="http://127.0.0.1:8080/image/order/0b252b69d7104716869d960ce47fd8be.jpg" alt="">
+                            <span>江诗丹顿Vacheron Constantin</span>
+                            <i class="bdsharettonbox share fr bdshare-button-style0-16" data-bd-bind="1566394310405">
+                                <a href="#" class="bds_more" data-cmd="more"></a>
+                            </i>
+                            <i class="collection fr login_first" data-sku="25558/000R-9406" data-channel_id="1">
+                                加入心愿单
+                            </i>
+                        </div>
+                        <div class="title-name">
+                            <h1>江诗丹顿 Vanchern Constantin TRADITIONNELLE系列 25558/000R-9406 石英 女款</h1>
+                            <span class="red"></span>
+                        </div>
                     </div>
-                    
+                    <div class="content">
+                        <div class="price-row clearfix">
+                            <p>
+                                <span class="red">¥142,000</span>
+                                <!-- <em></em> -->
+                                <span class="pre-money">预付定金</span>  
+                                <span class="red">¥4,200</span>
+                            </p>
+                            <div class="erwercode fr">
+                                <span>扫一扫</span>
+                                <!-- 用jq写 -->
+                                <div class="pic" id="qrcode"></div>
+                            </div>
+                        </div>
+                        <div class="channel">
+                            <div class="name">渠道售价</div>
+                            <div class="btns">
+                                <a href="" class="item on">正价购买</a>
+                            </div>
+                        </div>
+                        <div class="getPointTips" @mouseover="showmytable" @mouseout="showmytable">
+                            <span >奖励：购物一次最多可以有10400积分!</span>
+                            <div class="tips" v-show="showtable">
+                                <p>
+                                    <span>购买&晒单有积分!</span>
+                                </p>
+                                <p>
+                                    <span class="red">首次购就有积分!</span>
+                                    在盛时网山的第一笔任意额消费购买实物商品即可获得200积分
+                                </p>
+                                <p>
+                                    <span class="red">每笔订单满额就有积分!</span>
+                                    凡在盛时网上单笔订单购买商品成交达成规定金额， 即可获得对应的积分奖励!
+                                </p>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <th>积分奖励条件</th>
+                                            <th>获得积分</th>
+                                        </tr>
+                                        <tr>
+                                            <td>单笔订单金额超过99元</td>
+                                            <td>100</td>
+                                        </tr>
+                                        <tr>
+                                            <td>单笔订单金额超过999元</td>
+                                            <td>1000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>单笔订单金额超过4999元</td>
+                                            <td>5000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>单笔订单金额超过9999元</td>
+                                            <td>10000</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p><span class="red">评价有积分！</span>收到实物商品后晒单评价每次可获得200积分</p>
+                            </div>
+                        </div>
+
+                        <div class="detail-list">
+                            <div class="detail-list-item">
+                                <div class="detail-list-item-title">系列<i><span>品牌设计风格的划分</span></i></div>
+                                <div class="detail-list-item-attributes">
+                                    <a href="javascript:;"></a>
+                                </div>
+                            </div>
+
+                            <div class="detail-list-item half" >
+                                <div class="detail-list-item-title">产地<i><span>腕表的主要生产地</span></i></div>
+                                <div class="detail-list-item-attributes">中国</div>
+                            </div>
+
+                            <div class="detail-list-item half">
+                                <div class="detail-list-item-title">表径<i><span>腕表的表身直径(含表壳，不包括表冠、表耳部分) </span></i></div>
+                                <div class="detail-list-item-attributes">38.0mm</div>
+                            </div>
+
+                            <div class="detail-list-item half">
+                                <div class="detail-list-item-title">表带<i><span>对腕表固定手腕有效部分的统称，材质与款式繁多</span></i></div>
+                                <div class="detail-list-item-attributes">棕色&nbsp;牛皮</div>
+                            </div>
+
+                            <div class="detail-list-item half">
+                                <div class="detail-list-item-title">库存<i><span>库存以客服确认为准</span></i></div>
+                                <div class="detail-list-item-attributes">有货</div>
+                            </div>
+                        </div>
+
+                        <div class="detail-button clearfix">
+                            <button type="button" class="pay fl add-cart-btn" data-sku="CSW00004M-CS" data-channel="1" data-cart_type="1" data-is_ajax="0"
+                            @click="addcart"
+                            >全额支付配送上门</button>
+                            <span v-show="showmsg">{{message}}</span>
+                            <!-- <button type="button" class="pay fl add-cart-btn" data-sku="CSW00004M-CS" data-channel="1" data-cart_type="1" data-is_ajax="0"
+                            >全额支付配送上门</button> -->
+                            <span class="compare fl" data-pkid="10129193">对比</span>
+                            <span class="sales-volume fl">门店销量：30</span>
+                        </div>
+                    </div>
+                    <div class="more-hot">
+                        <p>相关专题</p>
+                        <router-link to="" v-for="(item,i) of alist" :key="i">{{item}}</router-link>
+                    </div>
+                    <div class="user-show" style="display: none;">
+                        <div class="user-show-top">
+                            <div class="user-show-top-title">
+                                <img src="http://127.0.0.1:8080/image/images/product/晒图.png">
+                            </div>
+                            <div class="user-show-top-more">
+                               <router-link to="">全部<span>0</span>张&gt;&gt;</router-link> 
+                            </div>
+                        </div>
+                        <div class="user-show-pics">
+                            <a class="item"></a>
+                            <a class="item"></a>
+                            <a class="item"></a>
+                            <a class="item"></a>
+                        </div>
+                    </div>
+                </div>
                 </section>
                 
+                        
             </main>
         </div>
         <my-footer></my-footer>
@@ -55,28 +210,34 @@ export default {
             pics:[
                 {order_watch_id:1,displayimg:"",lname:"",price:""}
             ],                 //保存服务器返回的图片
+            lilist:"江诗丹顿售后维修点如何查询?",
             i:1,
+            to:5,
             show:false,
+            showtable:false,
+            showmsg:false,
             maskStyle:{left:0, top:-112},
             activeColor:'red',
+            price:0,
+            alist:["石英","男款","时尚","浪琴"]
+            
 
             
         }
     },
-   
+    created() {
+        this.loadMore();
+    },
     methods:{
-        created() {
-            this.loadMore();
-        },
         loadMore(){
             // 1.创建url地址
             var url = "order";
             // 2.发送ajax请求
             this.axios.get(url).then(res=>{
-                //console.log(res);
-                this.pics = res.data.data; 
-                console.log(this.pics)
-                })
+            //console.log(res);
+            this.pics = res.data.data; 
+            //console.log(this.pics[0])
+            })
         },
         // 完成展示表的切换
         changeone(e){
@@ -107,11 +268,40 @@ export default {
         toggle(){
             this.show=!this.show;
         },
+        gbPosition(){
+            return `${-parseInt(this.maskStyle.left)*16/7}px ${-parseInt(this.maskStyle.top)*16/7}px`;
+        },
         // computed:{
-        //     gbPosition(){
-        //     return `${-parseInt(this.maskStyle.left)*3/2}px ${-parseInt(this.maskStyle.top)*3/2}px`;
-        //     }
+        //     // gbPosition(){
+        //     //     return `${-parseInt(this.maskStyle.left)*16/7}px ${-parseInt(this.maskStyle.top)*16/7}px`;
+        //     // }
         // },
+        showmytable(){
+            this.showtable = !this.showtable;
+        },
+        addcart(){
+            var lid = 1;
+            var price = 1000;
+            var lname = "my";
+            console.log(lid,price,lname);
+            var url = "addcart";
+            var obj={lid,lname,price}
+            this.axios.get(url,{params:obj}).then(res=>{
+                console.log(res);
+                // if(res.data.code==-1){
+                //     //异步，所以要用回调函数
+                //     this.message = '请先登录';
+                //     this.showmsg = true;
+                //     this.$router.push("/login");
+                // }else 
+                if(res.data.code==-2){
+                    this.message = '添加失败';
+                }else{
+                    this.message = '添加成功';
+                    this.$router.push("/cart");
+                }
+            })
+        },
         
     }
 }

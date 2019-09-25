@@ -150,7 +150,7 @@ server.get("/longinesproduct",(req,res)=>{
 server.get("/order",(req,res)=>{
   var pics = [];
   // 展示图片
-  var sql1 = "SELECT order_watch_id,displayimg FROM censh_order_pic";
+  var sql1 = "SELECT lid,displayimg FROM censh_order_pic";
   pool.query(sql1,(err,result)=>{
     if(err)throw err;
     if(result.length==0){
@@ -247,7 +247,8 @@ server.get("/longinesred12",(req,res)=>{
 //功能六：将指定商品添加至购物车
 //#此功能先行条件先登录
 //1:接收客户端请求 /addcart GET
-//http://127.0.0.1:8080/login?uname=tom&upwd=123
+//http://127.0.0.1:8080/login?uname=188123456789&upwd=123
+//http://127.0.0.1:8080/login?uname=122123456789&upwd=123
 //http://127.0.0.1:8080/addcart?lid=1&lname=kk&price=9
 server.get("/addcart",(req,res)=>{
 //2:判断当前用户是否登录成功

@@ -271,8 +271,8 @@ INSERT INTO censh_longinesproduct_work_pic VALUES
 
 /*****单个商品详情页的图片*******/
 CREATE TABLE censh_order_pic(
-  pid INT PRIMARY KEY AUTO_INCREMENT,
-  order_watch_id INT,              #笔记本电脑编号
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  lid INT,              #笔记本电脑编号
   displayimg VARCHAR(128),            #展示图片路径
   lname VARCHAR(128),               #商品的名字
   price DECIMAL(10,2)
@@ -399,7 +399,7 @@ INSERT INTO censh_cart VALUES
 (NULL,1,1,1000,"浪琴",1),
 (NULL,2,1,2000,"浪琴",1),
 (NULL,3,2,3000,"浪琴",1),
-(NULL,4,2,4000,"宝玑"1);
+(NULL,4,2,4000,"宝玑",1);
 /*****购物车*******/
 CREATE TABLE censh_shoppingcart(
   lid INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,

@@ -75,60 +75,63 @@ main section.summary .summary-image .picture ul li img{
     width:600px; height:600px;
     z-index:1000;
     border: 1px solid rgba(0, 0, 0, 0.125);
-    background:url(http://127.0.0.1:8080/image/order/9e238e44beb44f338a3ab6ceec185fc4X640.jpg) no-repeat;
 } 
-main section.summary p.tip{
-    display: block;
-    margin: 28px 0 0 15%;
+/* main p.tip{
+    display: inline-block;
     font-size: 12px;
     color: #b2b2b2;
     line-height: 20px;
     border-bottom: none;
-}
-main section.summary .icon360{
+    margin-top: 90px;
+    width: 40%;
+} */
+main .icon360{
     width: 70px;
     height: 70px;
-    float: right;
     cursor: pointer;
+   
 }
-main section.summary .summary-news{
-    width: 100%;
+main .summary-news{
+    width: 40%;
     box-sizing: border-box;
     border: 1px solid #d2d2d2;
     padding: 20px 30px;
     margin-top: 20px;
 }
-main section.summary .summary-news .title{
+main .summary-news .title{
     position: relative;
     font-size: 16px;
     font-weight: 700;
     padding-bottom: 10px;
+    border: none;
 }
-main section.summary .summary-news .more{
+main .summary-news .more{
     padding-left: 20px;
     font-weight: 400;
     display: inline-block;
     font-size: 12px;
     color: #a3a3a3;
 }
-main section.summary .summary-news ul{
+main .summary-news ul{
     width: 100%;
 }
-main section.summary .summary-news ul li{
+main .summary-news ul li{
     width: 100%;
     list-style: disc inside;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-main section.summary .summary-news ul li a{
+main .summary-news ul li a{
     line-height: 2;
     font-size: 12px;
     color: #747474;
 }
-main section.summary .summary-detail{
+main .summary-detail{
     width:47%;
     padding-left: 5%;
+    float: right;
+    margin-top: -710px;
 }
 main section.summary .summary-detail .title .title-brand{
     position: relative;
@@ -238,7 +241,7 @@ main section.summary .summary-detail .content .price-row .erwercode span{
     cursor: pointer;
 }
 main section.summary .summary-detail .content .price-row .erwercode .pic{
-    display: none;
+    display: block;
     width: 100px;
     height: 100px;
     box-shadow: 0 0 10px #d2d2d2;
@@ -290,7 +293,7 @@ main section.summary .summary-detail .content>.getPointTips{
     font-size: 14px;
     line-height: 20px;
     position: relative;
-    z-index: 100;
+    /* z-index: 100; */
 }
 main section.summary .summary-detail .content>.getPointTips{
     cursor: pointer;
@@ -298,11 +301,11 @@ main section.summary .summary-detail .content>.getPointTips{
 main section.summary .summary-detail .content>.getPointTips>.tips{
     position: absolute;
     top:-150px;
-    left: 200px;
-    display: none;
+    left: 180px;
     background-color: #fff;
     box-shadow: 0 0 5px #ddd;
     padding: 10px;
+    width: 300px;
 }
 main section.summary .summary-detail .content>.getPointTips>.tips>p{
     text-align: center;
@@ -314,4 +317,152 @@ main section.summary .summary-detail .content>.getPointTips>.tips>p span{
 }
 main section.summary .summary-detail .content>.getPointTips>.tips>p>.red{
     color: #e51f1d;
+}
+main section.summary .summary-detail .content>.getPointTips>.tips>table{
+    width: 300px;
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+main section.summary .summary-detail .content>.getPointTips>.tips>table tr td, main section.summary .summary-detail .content>.getPointTips>.tips>table tr th {
+    border: 1px solid #ccc;
+    text-align: center;
+    padding: 5px;
+}
+main section.summary .summary-detail .content>.getPointTips>.tips>p {
+    margin-bottom: 10px;
+}
+section.summary .summary-detail .content .detail-list{
+    display: flex;
+    flex-flow: row wrap;
+}
+main section.summary .summary-detail .content .detail-list-item {
+    display: flex;
+    flex-flow: row nowrap;
+    margin-bottom: 30px;
+    width: 100%;
+}
+main section.summary .summary-detail .content .detail-list-item-title {
+    flex: none;
+    font-size: 14px;
+    color: #474747;
+    line-height: 1;
+    margin-right: 30px;
+    position: relative;
+}
+main section.summary .summary-detail .content .detail-list-item-title i {
+    width: 10px;
+    height: 10px;
+    background: url(http://127.0.0.1:8080/image/images/product/qua.png) 0 0/10px 10px no-repeat;
+    cursor: pointer;
+    position: absolute;
+    top: 3px;
+    right: -20px;
+    z-index: 10;
+}
+main section.summary .summary-detail .content .detail-list-item-title i span {
+    display: none;
+    position: absolute;
+    z-index: 11;
+    content: "";
+    background-color: #fff;
+    -webkit-box-shadow: 0 0 10px #d2d2d2;
+    box-shadow: 0 0 10px #d2d2d2;
+    padding: 5px 10px;
+    color: #b2b2b2;
+    white-space: nowrap;
+    top: 5px;
+    left: 15px;
+    opacity: 0;
+}
+main section.summary .summary-detail .content .detail-list-item-attributes {
+    flex: auto;
+    font-size: 14px;
+    color: #747474;
+    line-height: 1;
+}
+main section.summary .summary-detail .content .detail-list-item-attributes>a {
+    color: #bda377;
+}
+main section.summary .summary-detail .content .detail-list-item.half {
+    width: 50%;
+}
+main section.summary .summary-detail .content .detail-button {
+    margin-bottom: 20px;
+}
+main section.summary .summary-detail .content .detail-button .all-pay, main section.summary .summary-detail .content .detail-button .cart, main section.summary .summary-detail .content .detail-button .pay, main section.summary .summary-detail .content .detail-button .sold-out {
+    background-color: #bea377;
+}
+main section.summary .summary-detail .content .detail-button .compare {
+    margin: 20px 0 0 10px;
+    padding-left: 15px;
+    font-size: 14px;
+    background: url(http://127.0.0.1:8080/image/images/product/add-space.png) left/12px 12px no-repeat;
+    color: #a3a3a3;
+    cursor: pointer;
+}
+main section.summary .summary-detail .content .detail-button .sales-volume {
+    margin: 20px 0 0 10px;
+    padding-left: 15px;
+    font-size: 14px;
+    color: #a3a3a3;
+}
+main section.summary .summary-detail .more-hot {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+main section.summary .summary-detail .more-hot p {
+    font-size: 12px;
+    color: #747474;
+    margin-bottom: 15px;
+}
+main section.summary .summary-detail .more-hot a {
+    margin-right: 15px;
+    margin-bottom: 10px;
+    height: 22px;
+    padding: 0 10px;
+    display: inline-block;
+    color: #bda377;
+    background-color: #f3f3f3;
+    line-height: 22px;
+    border-radius: 50px;
+}
+main section.summary .summary-detail .user-show {
+    width: 100%;
+}
+main section.summary .summary-detail .user-show-top {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 10px;
+}
+main section.summary .summary-detail .user-show * {
+    line-height: 1;
+    box-sizing: border-box;
+}
+main section.summary .summary-detail .user-show-top-more, main section.summary .summary-detail .user-show-top-title {
+    flex: none;
+}
+main section.summary .summary-detail .user-show-top-more a {
+    color: #999;
+    text-decoration: none;
+}
+main section.summary .summary-detail .user-show-pics {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+}
+main section.summary .summary-detail .user-show-pics .item {
+    flex: none;
+    border: 1px solid #e9e6e2;
+    width: 122px;
+    height: 120px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 5px;
 }

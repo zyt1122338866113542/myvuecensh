@@ -268,6 +268,7 @@ export default {
       ]
     }
   },
+  props:["kw"], //自动接收地址栏关键词参数kw作为查询条件
   created() {
     this.loadMore();
   },
@@ -276,7 +277,7 @@ export default {
       // 1.创建url地址
       var url = "longinesproduct";
       this.pno++;
-      var obj = {pno:this.pno}
+      var obj = {pno:this.pno,kw:this.kw}
       // 2.发送ajax请求
       this.axios.get(url,{params:obj}).then(res=>{
         //console.log(res);
