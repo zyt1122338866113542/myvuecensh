@@ -294,6 +294,20 @@ if(!uid){
   })
 })
 
+//功能七：查询指定用户购物车信息
+server.get("/carts",(req,res)=>{
+  var uid=req.session.uid;
+  // if(!uid){
+  //   res.send({code:-1,msg:"请登录"});
+  //   return;
+  // }
+  var sql="SELECT id,lname,price FROM censh_cart WHERE uid=?";
+  pool.query(sql,[uid],(err,result)=>{
+    if(err)throw err;
+    res.send({code:1,msg:"查询成功",data:result});
+  })
+})
+
 
 // //功能二:商品分页显示77~109
 // //1:接收客户请求 /product GET

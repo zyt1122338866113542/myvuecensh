@@ -280,7 +280,7 @@ export default {
             this.showtable = !this.showtable;
         },
         addcart(){
-            var lid = 1;
+            var lid = 8;
             var price = 1000;
             var lname = "my";
             console.log(lid,price,lname);
@@ -295,9 +295,9 @@ export default {
                 //     this.$router.push("/login");
                 // }else 
                 if(res.data.code==-2){
-                    this.message = '添加失败';
+                    console.log("添加失败")
                 }else{
-                    this.message = '添加成功';
+                    console.log("添加成功")
                     this.$router.push("/cart");
                 }
             })
