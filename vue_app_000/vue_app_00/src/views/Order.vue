@@ -166,6 +166,7 @@
                             <button type="button" class="pay fl add-cart-btn" data-sku="CSW00004M-CS" data-channel="1" data-cart_type="1" data-is_ajax="0"
                             @click="addcart"
                             >全额支付配送上门</button>
+                            <button @click="jump">跳转到购物车</button>
                             <span v-show="showmsg">{{message}}</span>
                             <!-- <button type="button" class="pay fl add-cart-btn" data-sku="CSW00004M-CS" data-channel="1" data-cart_type="1" data-is_ajax="0"
                             >全额支付配送上门</button> -->
@@ -280,12 +281,12 @@ export default {
             this.showtable = !this.showtable;
         },
         addcart(){
-            var lid = 8;
-            var price = 1000;
-            var lname = "my";
-            console.log(lid,price,lname);
+            var mylid = 10;
+            var myprice = 1000;
+            var mylname = "my";
+            console.log(mylid,myprice,mylname);
             var url = "addcart";
-            var obj={lid,lname,price}
+            var obj={lid:mylid,lname:mylname,price:myprice}
             this.axios.get(url,{params:obj}).then(res=>{
                 console.log(res);
                 // if(res.data.code==-1){
@@ -298,10 +299,14 @@ export default {
                     console.log("添加失败")
                 }else{
                     console.log("添加成功")
-                    this.$router.push("/cart");
+                    //http://127.0.0.1:8080/addcart?lid=1&lname=kk&price=9
+                    
                 }
             })
         },
+        jump(){
+            this.$router.push("/cart");
+        }
         
     }
 }

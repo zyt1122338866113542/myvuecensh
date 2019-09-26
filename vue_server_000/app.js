@@ -256,10 +256,10 @@ server.get("/addcart",(req,res)=>{
 //  如果uid为undefined 没登录
 var uid = req.session.uid;
 //console.log(uid)
-if(!uid){
-  res.send({code:-1,msg:"请先登录"});
-  return;
-}
+// if(!uid){
+//   res.send({code:-1,msg:"请先登录"});
+//   return;
+// }
 //3:获取客户端数据???小心处理
 //  lid    商品编号
 //  price  商品价格
@@ -268,17 +268,17 @@ if(!uid){
   var price = req.query.price;
   var lname = req.query.lname;
   //4:创建查询sql:当前用户是否购买此商品
-  var sql = "SELECT id FROM censh_cart WHERE uid = ? AND lid = ? ";
+  var sql = "SELECT id FROM censh_cart WHERE lid = ? ";
   //5:执行sql语句
-  pool.query(sql,[uid,lid],(err,result)=>{
+  pool.query(sql,[lid],(err,result)=>{
     if(err)throw err;
     //6:在回调函数中判断下一步操作
     //  没购买过此商品  添加
     //  己购买过此商品  更新
     if(result.length==0){
-     var sql = `INSERT INTO censh_cart VALUES(null,${lid},${uid},${price},'${lname}',1)`;
+     var sql = `INSERT INTO censh_cart VALUES(null,${lid},1,${price},'${lname}',1)`;
     }else{
-     var sql = `UPDATE censh_cart SET count=count+1 WHERE uid=${uid} AND lid=${lid}`;
+     var sql = `UPDATE censh_cart SET count=count+1 WHERE lid=${lid}`;
     }
     //7:执行sql获取返回结果
     pool.query(sql,(err,result)=>{
@@ -301,148 +301,52 @@ server.get("/carts",(req,res)=>{
   //   res.send({code:-1,msg:"请登录"});
   //   return;
   // }
-  var sql="SELECT id,lname,price FROM censh_cart WHERE uid=?";
+  var sql="SELECT id,lname,price FROM censh_cart ";
   pool.query(sql,[uid],(err,result)=>{
     if(err)throw err;
     res.send({code:1,msg:"查询成功",data:result});
   })
 })
 
+//功能八：删除指定用户购物车信息
+server.get("/delcart",(req,res)=>{
+  var uid = req.session.uid;
+  // if(!uid){
+  //   res.send({code:-1,msg:"请先登录"});
+  //   return;
+  // }
+  var id=req.query.id;
+  var sql="DELETE FROM censh_cart WHERE id=?";
+  pool.query(sql,[id],(err,result)=>{
+    if(err) throw err;
+    if(result.affectedRows>0){
+      res.send({code:2,msg:"商品删除成功"});
+     }else{
+      res.send({code:-3,msg:"删除失败"}); 
+     }
+  })
+})
 
-// //功能二:商品分页显示77~109
-// //1:接收客户请求 /product GET
-// // http://127.0.0.1:8
-// server.get("/product",(req,res)=>{
-//  //2:接收客户请求数据 
-//  //  pno 页码   pageSize 页大小
-//  var pno = req.query.pno;
-//  var ps  = req.query.pageSize;
-//  //3:如果客户没有请示数据设置默认数据
-//  //  pno=1     pageSize=4
-//  if(!pno){
-//    pno = 1;
-//  }
-//  if(!ps){
-//    ps = 4;
-//  }
-//  //4:创建sql语句
-//  var sql = "SELECT lid,lname,price,img_url";
-//  sql+=" FROM xz_laptop";
-//  sql+=" LIMIT ?,?";
-//  var offset = (pno-1)*ps;//起始记录数 ?
-//  ps = parseInt(ps);      //行数       ?
-//  //5:发送sql语句
-//  pool.query(sql,[offset,ps],(err,result)=>{
-//    //6:获取返回结果发送客户端
-//    if(err)throw err;
-//    res.send({code:1,msg:"查询成功",
-//    data:result});
-//  });
-// })
-
-
-// //功能三:将指定商品添加至购物车
-// //#此功能先行条件先登录
-// //1:接收客户端请求 /addcart GET
-// //http://127.0.0.1:8080/login?uname=tom&upwd=123
-// //http://127.0.0.1:8080/addcart?lid=1&lname=kk&price=9
-// server.get("/addcart",(req,res)=>{
-// //2:判断当前用户是否登录成功
-// //  uid
-// //  如果uid为undefined 没登录
-// var uid = req.session.uid;
-// if(!uid){
-//   res.send({code:-1,msg:"请先登录"});
-//   return;
-// }
-// //3:获取客户端数据???小心处理
-// //  lid    商品编号
-// //  price  商品价格
-// //  lname  商品名称
-// var lid = req.query.lid;
-// var price = req.query.price;
-// var lname = req.query.lname;
-// //console.log(lid+":"+price+":"+lname)
-// //res.send(lid+":"+price+":"+lname);
-// //4:创建查询sql:当前用户是否购买此商品
-// var sql = "SELECT id FROM xz_cart";
-// sql+=" WHERE uid = ? AND lid = ?";
-// //5:执行sql语句
-// pool.query(sql,[uid,lid],(err,result)=>{
-//   if(err)throw err;
-//   //6:在回调函数中判断下一步操作
-//   //  没购买过此商品  添加
-//   //  己购买过此商品  更新
-//   if(result.length==0){
-//    var sql = `INSERT INTO xz_cart VALUES(null,${lid},${price},1,'${lname}',${uid})`;
-//   }else{
-//    var sql = `UPDATE xz_cart SET count=count+1 WHERE uid=${uid} AND lid=${lid}`;
-//   }
-//   //7:执行sql获取返回结果
-//   pool.query(sql,(err,result)=>{
-//     if(err)throw err;
-//     //8:如果sql UPDATE INSERT DELETE
-//     //判断执行成功 result.affectedRows 影响行数
-//     if(result.affectedRows>0){
-//      res.send({code:1,msg:"商品添加成功"});
-//     }else{
-//      res.send({code:-2,msg:"添加失败"}); 
-//     }
-//   })
-// })
-// })
-// //功能4：查询指定用户购物车信息
-// server.get("/carts",(req,res)=>{
-//   var uid=req.session.uid;
-//   if(!uid){
-//     res.send({code:-1,msg:"请登录"});
-//     return;
-//   }
-//   var sql="SELECT id,lname,price FROM xz_cart WHERE uid=?";
-//   pool.query(sql,[uid],(err,result)=>{
-//     if(err)throw err;
-//     res.send({code:1,msg:"查询成功",data:result});
-//   })
-// })
-
-// //功能5：删除指定用户购物车信息
-// server.get("/delcart",(req,res)=>{
-//   var uid = req.session.uid;
-//   if(!uid){
-//     res.send({code:-1,msg:"请先登录"});
-//     return;
-//   }
-//   var id=req.query.id;
-//   var sql="DELETE FROM xz_cart WHERE id=?";
-//   pool.query(sql,[id],(err,result)=>{
-//     if(err) throw err;
-//     // res.send({code:2,msg:"删除成功",data:result});
-
-//     if(result.affectedRows>0){
-//       res.send({code:2,msg:"商品删除成功"});
-//      }else{
-//       res.send({code:-3,msg:"删除失败"}); 
-//      }
-//   })
-// })
-
-// //功能6：删除多个指定用户购物车信息
-// server.get("/delcarts",(req,res)=>{
-//   var uid = req.session.uid;
-//   if(!uid){
-//     res.send({code:-1,msg:"请先登录"});
-//     return;
-//   }
-//   var id=req.query.id;
-//   var sql=`DELETE FROM xz_cart  WHERE id IN (${id})`;
-//   pool.query(sql,(err,result)=>{
-//     if(err) throw err;
-//     if(result.affectedRows>0){
-//       res.send({code:2,msg:"商品删除成功"});
-//      }else{
-//       res.send({code:-3,msg:"删除失败"}); 
-//      }
-//   })
-// })
+//功能6：删除多个指定用户购物车信息
+server.get("/delcarts",(req,res)=>{
+  var uid = req.session.uid;
+  // if(!uid){
+  //   res.send({code:-1,msg:"请先登录"});
+  //   return;
+  // }
+  var id=req.query.id;
+  console.log(id)
+  var sql=`DELETE FROM censh_cart  WHERE id IN (${id})`;
+  pool.query(sql,(err,result)=>{
+    if(err) throw err;
+    if(result.affectedRows>0){
+      console.log(result)
+      res.send({code:2,msg:"商品删除成功"});
+     }else{
+      console.log(result)
+      res.send({code:-3,msg:"删除失败"}); 
+     }
+  })
+})
 
 

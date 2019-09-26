@@ -132,9 +132,9 @@
           &nbsp;对比
               </label>
                 <div class="list-top">
-                  <router-link to="order">
+                  <router-link to="" >
                       <!-- 事件 -->
-                      <img :src=" `http://127.0.0.1:8080/`+ item.img" alt="">
+                      <img :src=" `http://127.0.0.1:8080/`+ item.img" alt="" @click="jumporder">
                   </router-link>
                 </div>
                 <div class="list-bottom">
@@ -231,6 +231,7 @@ export default {
       pno:0,
       pcount:3,
       show:false,                             //控制标签的切换
+      lid:9,
       group:[
         //榜单列表
         "资讯榜单","品牌榜单","机芯类型排行榜","表款类型排行榜"
@@ -307,12 +308,18 @@ export default {
     // tab标签切换
     tab1(){
       this.show=false;
-      console.log(111)
     },
     tab2(){
       this.show=true;
-      console.log(222)
     },
+    jumporder(){
+      var url = "order";
+      var obj = {lid:this.lid}
+      this.axios.get(url,{params:obj}).then(res=>{
+        //console.log(res);
+        this.$router.push("/order/"+this.lid)
+      })
+    }
   }
 }
 </script>

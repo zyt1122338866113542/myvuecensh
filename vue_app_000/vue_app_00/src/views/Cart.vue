@@ -76,12 +76,34 @@
                     </span>
                 </li>
                 <li class="field-action">
-                    <button class="cart-item-delete" type="button" id="del"> 删除</button>
+                    <button class="cart-item-delete" type="button" id="del" @click="del" :data-id="item.id"> 删除</button>
                 </li>
                             
               </ul>
             </div>
           </div>
+            <div class="cart-footer">
+              <div class="tip">
+                <img src="http://127.0.0.1:8080/image/images/checked.png" alt="">结算前请勾选商品 
+              </div>
+              <input type="hidden" name="cart_type" value="1">
+              <span  class="delete-checked-items left" >
+                <i></i>
+                <!-- <button @click="aaa">删除选中商品</button>  -->
+                <span @click="delmore">删除选中商品</span>
+              </span>
+              <a href="javascript:;" class="continue-shopping left">继续浏览购物</a>
+              <!-- <button  class="disabled_btn right " id="pay">立即结算</button> -->
+              <span @click="jump" class="right disabled_btn">立即结算2</span>
+              <span class="subtotal right amount-total">合计
+                ￥<span class="num checked-amoubt" id="totalAll">1499</span>元
+
+                ￥<span class="num checked-amoubt" id="total">1,499</span>元
+              </span>
+              <span class="subtotal right">已选商品
+                <span class="num checked-count">1</span>款
+            </span>
+            </div> 
         </form>
         </section>
       </main>
@@ -94,9 +116,13 @@
       return{
         step:["我的购物车","填写核对订单信息","成功提交订单","订单支付完成"],
         index:0,
-        list:[]    //当前登录用户购物车列表
+        list:[],    //当前登录用户购物车列表
+        lid:1,
+        lname:'新款手表',
+        price:5000,
       } 
     },
+    //props:["mylid"],
     created() {
         this.loadMore();
     },
@@ -123,7 +149,63 @@
               console.log(this.list)
           }
         })
+      },
+      // 删除一个
+      del(e){
+        var id=e.target.dataset.id;
+        var url = "delcart";
+        var obj={id};
+        this.axios.get(url,{params:obj})
+        .then(res=>{
+          if(res.data.code==2){
+            this.loadMore();
+          }else{
+            console.log('删除失败')
+          }
+        }).catch(err=>{
+          console.log(err)
+        })
+      },
+      // 全删
+      delmore(){
+        //console.log(5555555555)
+        var id = "";
+        for(var item of this.list){
+          //console.log(item)
+            if(!item.cb){
+              //拼接id
+              id+=item.id + ",";
+            }
+        }
+        
+        //去掉最后的逗号
+        id=id.slice(0,-1);
+        console.log(id);
+        if(id==""){
+          console.log('请选择要删除的')
+          return;
+        }
+        var url = "delcarts";
+        var obj = {id};
+        this.axios.get(url,{params:obj}).then(res=>{
+          console.log(res)
+          if(res.data.code==2){
+            this.loadMore();
+            console.log("删除cg11111")
+          }else{
+            console.log("删除失败")
+            
+          }
+        })    
+      },
+      aaa(){
+        //console.log(222)
+      },
+      jump(){
+        console.log(44545)
       }
+
+
     }
     
   }

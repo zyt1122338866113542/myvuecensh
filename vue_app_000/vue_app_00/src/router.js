@@ -10,11 +10,11 @@ import Cart from './views/Cart.vue'
 Vue.use(Router)
 export default new Router({
   routes: [
-    // {path:"/",component:Index},
+    {path:"/",component:Index},
     {path:"/index",component:Index},
     {path:"/login",component:Login},
-    {path:"/longinesproduct",component:LonginesProduct},
-    {path:"/order",component:Order},
+    {path:"/longinesproduct/:kw",component:LonginesProduct,props:true},
+    {path:"/order/:lid",component:Order,props:true},
     {path:"/qiye",component:Qiye},
     {path:"/longinesred12",component:LonginesRed12},
     {path:"/cart",component:Cart},
