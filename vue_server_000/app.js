@@ -301,10 +301,11 @@ server.get("/carts",(req,res)=>{
   //   res.send({code:-1,msg:"请登录"});
   //   return;
   // }
-  var sql="SELECT id,lname,price FROM censh_cart ";
+  var sql="SELECT id,lname,price,count FROM censh_cart ";
   pool.query(sql,[uid],(err,result)=>{
     if(err)throw err;
     res.send({code:1,msg:"查询成功",data:result});
+    console.log(result)
   })
 })
 

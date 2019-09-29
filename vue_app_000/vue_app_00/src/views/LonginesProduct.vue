@@ -314,10 +314,10 @@ export default {
     },
     jumporder(){
       var url = "order";
-      var obj = {lid:this.lid}
-      this.axios.get(url,{params:obj}).then(res=>{
+      //var obj = {lid:this.lid}
+      this.axios.get(url).then(res=>{
         //console.log(res);
-        this.$router.push("/order/"+this.lid)
+        this.$router.push("/order")
       })
     }
   }

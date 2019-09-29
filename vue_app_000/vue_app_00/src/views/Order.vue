@@ -281,9 +281,9 @@ export default {
             this.showtable = !this.showtable;
         },
         addcart(){
-            var mylid = 10;
+            var mylid = 11;
             var myprice = 1000;
-            var mylname = "my";
+            var mylname = "ww";
             console.log(mylid,myprice,mylname);
             var url = "addcart";
             var obj={lid:mylid,lname:mylname,price:myprice}

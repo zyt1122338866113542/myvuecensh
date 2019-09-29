@@ -66,7 +66,8 @@
                 <li class="field-qty">
                     <div class="qty-box">
                         <span class="ff" id="minus">-</span>
-                        <input type="text" value="1" max="10" maxlength="4">
+                        <!-- <input type="text" value="{{item.count}}" max="10" maxlength="4"> -->
+                        <span class="count">{{item.count}}</span>
                         <span class="ff" id="plus">+</span>
                     </div>
                 </li>
@@ -120,6 +121,7 @@
         lid:1,
         lname:'新款手表',
         price:5000,
+        count:1
       } 
     },
     //props:["mylid"],

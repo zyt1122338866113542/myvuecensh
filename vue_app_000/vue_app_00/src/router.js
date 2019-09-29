@@ -14,7 +14,7 @@ export default new Router({
     {path:"/index",component:Index},
     {path:"/login",component:Login},
     {path:"/longinesproduct/:kw",component:LonginesProduct,props:true},
-    {path:"/order/:lid",component:Order,props:true},
+    {path:"/order",component:Order},
     {path:"/qiye",component:Qiye},
     {path:"/longinesred12",component:LonginesRed12},
     {path:"/cart",component:Cart},
