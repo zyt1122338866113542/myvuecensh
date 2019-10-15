@@ -65,10 +65,10 @@
                 </li>
                 <li class="field-qty">
                     <div class="qty-box">
-                        <span class="ff" id="minus">-</span>
+                        <span class="ff" id="minus" @click="minus" :data-lid="item.lid">-</span>
                         <!-- <input type="text" value="{{item.count}}" max="10" maxlength="4"> -->
                         <span class="count">{{item.count}}</span>
-                        <span class="ff" id="plus">+</span>
+                        <span class="ff" id="plus" @click="plus">+</span>
                     </div>
                 </li>
                 <li class="field-sum">
@@ -97,12 +97,11 @@
               <!-- <button  class="disabled_btn right " id="pay">立即结算</button> -->
               <span @click="jump" class="right disabled_btn">立即结算2</span>
               <span class="subtotal right amount-total">合计
-                ￥<span class="num checked-amoubt" id="totalAll">1499</span>元
-
-                ￥<span class="num checked-amoubt" id="total">1,499</span>元
+                ￥<span class="num checked-amoubt" id="totalAll">{{sum}}</span>元
               </span>
               <span class="subtotal right">已选商品
-                <span class="num checked-count">1</span>款
+                <span class="num checked-count">{{total}}</span>款
+                <span @click="upCount">商品数量变化</span>
             </span>
             </div> 
         </form>
@@ -121,7 +120,9 @@
         lid:1,
         lname:'新款手表',
         price:5000,
-        count:1
+        count:1,
+        total:0,
+        sum:0
       } 
     },
     //props:["mylid"],
@@ -142,12 +143,18 @@
             //创建循环遍历数据
             console.log(res)
             var rows = res.data.data;
+            var total = 0;
+            var sum = 0;
             for(var item of rows){
                 //添加新属性cb=false
                 item.cb = false;
+                total += item.count;
+                sum += item.price;
             }
               //重新赋值给list
-              this.list = rows;  
+              this.list = rows; 
+              this.total = total; 
+              this.sum = sum;
               console.log(this.list)
           }
         })
@@ -200,6 +207,30 @@
           }
         })    
       },
+      // 增加
+      plus(){
+
+      },
+      // 减少
+      minus(e){
+        var lid = e.target.dataset.lid;
+        console.log(lid);
+        var url = "carts";
+        var obj={lid}
+        this.axios.get(url,{params:obj}).then(res=>{
+            console.log(res);
+            if(res.data.code==-3){
+                console.log("减少失败")
+            }else{
+                console.log("减少成功")
+                //http://127.0.0.1:8080/addcart?lid=1&lname=kk&price=9
+                
+            }
+        })
+      },
+      upCount(){
+          this.$store.commit("updateTotal",this.total);
+        },
       aaa(){
         //console.log(222)
       },

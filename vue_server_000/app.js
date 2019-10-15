@@ -68,9 +68,9 @@ server.get("/login",(req,res)=>{
      //将用户id保存session对象中
      //uid当前登录：用户凭证
       req.session.uid = id;
-      console.log(req.session);
+      // console.log(req.session);
      res.send({code:1,msg:"登录成功"});
-      console.log(result)
+      // console.log(result)
    }
   });
 });
@@ -83,7 +83,7 @@ server.get("/index",(req,res)=>{
     if(result.length==0){
       res.send({code:-1,msg:"请求有误"})
     }else{
-      console.log(result)
+      // console.log(result)
       res.send({code:1,msg:"请求成功",data:result});
     }
   })
@@ -157,7 +157,7 @@ server.get("/order",(req,res)=>{
       res.send({code:-1,msg:"请求有误"})
     }else{
       pics.push(result);
-      console.log(pics)
+      // console.log(pics)
       res.send({code:1,msg:"请求成功",data:pics});
     }
   })
@@ -224,7 +224,7 @@ server.get("/qiye",(req,res)=>{
       res.send({code:-1,msg:"请求有误"})
     }else{
       res.send({code:1,msg:"请求成功",data:result});
-      console.log(result)
+      // console.log(result)
     }
   })
 })
@@ -238,7 +238,7 @@ server.get("/longinesred12",(req,res)=>{
       res.send({code:-1,msg:"请求有误"})
     }else{
       res.send({code:1,msg:"请求成功",data:result});
-      console.log(result)
+      // console.log(result)
     }
   })
 })
@@ -301,15 +301,52 @@ server.get("/carts",(req,res)=>{
   //   res.send({code:-1,msg:"请登录"});
   //   return;
   // }
-  var sql="SELECT id,lname,price,count FROM censh_cart ";
+  var sql="SELECT id,lid,lname,price,count FROM censh_cart ";
   pool.query(sql,[uid],(err,result)=>{
     if(err)throw err;
     res.send({code:1,msg:"查询成功",data:result});
-    console.log(result)
+    // console.log(result)
   })
 })
 
-//功能八：删除指定用户购物车信息
+
+//功能八：减少指定用户购物车信息
+server.get("/carts",(req,res)=>{
+  var lid = req.query.lid;
+  console.log(lid)
+  var uid=req.session.uid;
+  // if(!uid){
+  //   res.send({code:-1,msg:"请登录"});
+  //   return;
+  // }
+  var sql = `UPDATE censh_cart SET count=count-1 WHERE lid=${lid}`;
+  pool.query(sql,[lid],(err,result)=>{
+    if(err) throw err;
+    if(result.affectedRows>0){
+      res.send({code:2,msg:"商品减少成功"});
+     }else{
+      res.send({code:-3,msg:"减少失败"}); 
+     }
+  })
+})
+//功能九：增加指定用户购物车信息
+server.get("/carts",(req,res)=>{
+  var lid = req.query.lid;
+  var uid=req.session.uid;
+  // if(!uid){
+  //   res.send({code:-1,msg:"请登录"});
+  //   return;
+  // }
+  pool.query(sql,[lid],(err,result)=>{
+    if(err) throw err;
+    if(result.affectedRows>0){
+      res.send({code:2,msg:"商品删除成功"});
+     }else{
+      res.send({code:-3,msg:"删除失败"}); 
+     }
+  })
+})
+//功能十：删除指定用户购物车信息
 server.get("/delcart",(req,res)=>{
   var uid = req.session.uid;
   // if(!uid){
@@ -328,7 +365,7 @@ server.get("/delcart",(req,res)=>{
   })
 })
 
-//功能6：删除多个指定用户购物车信息
+//功能11：删除多个指定用户购物车信息
 server.get("/delcarts",(req,res)=>{
   var uid = req.session.uid;
   // if(!uid){

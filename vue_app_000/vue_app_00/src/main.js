@@ -27,7 +27,42 @@ import './lib/mui/css/mui.css'
 // 还需要加载图标字体文件
 import './lib/mui/css/icons-extra.css'
 
+//引入第三方模块
+import Vuex from 'vuex'
+//注册实例(先注册在创建存储对象)
+Vue.use(Vuex)
+//创建存储对象
+var store = new Vuex.Store({
+  state:{       //集中管理数据属性
+    total:0
+  },
+  mutations:{
+    updateTotal(state,total){
+      state.total = total;
+    },
+    clear(state){
+      state.total = 0;
+    }
+  },
+  actions:{
+    //集中保存异步修改数据函数
+    modifyCount:(context)=>{
+      setTimeout(()=>{
+        //异步调用mutations中的函数
+        //完成异步修改数据
+        context.commit("clear");
+      },3000)
+    }
+  },
+  getters:{    //集中获取数据函数
+    getTotal(state){  //特殊：所有函数都有参数
+      return state.total;
+    }
+  }
+})
+//将存储对象添加vue实例作为属性
 new Vue({
   router,
-  render: h => h(App)
+  render: h => h(App),
+  store
 }).$mount('#app')

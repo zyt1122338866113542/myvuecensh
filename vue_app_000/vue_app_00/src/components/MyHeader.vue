@@ -55,7 +55,7 @@
                     <div class="swiper-container"></div>
                 </form>	
                 <a href="#" class="cart" onclick="point_click('购物车')">
-                    <i class="ccart-num">0</i>
+                    <i class="ccart-num">{{$store.getters.getTotal}}</i>
                 </a>
             </div>
         </div>
