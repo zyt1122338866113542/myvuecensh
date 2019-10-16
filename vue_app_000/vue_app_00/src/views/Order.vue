@@ -220,7 +220,8 @@ export default {
             maskStyle:{left:0, top:-112},
             activeColor:'red',
             price:0,
-            alist:["石英","男款","时尚","浪琴"]
+            alist:["石英","男款","时尚","浪琴"],
+            total:1
             
 
             
@@ -299,6 +300,7 @@ export default {
                     console.log("添加失败")
                 }else{
                     console.log("添加成功")
+                    this.$store.commit("updateTotal",this.total);
                     //http://127.0.0.1:8080/addcart?lid=1&lname=kk&price=9
                     
                 }

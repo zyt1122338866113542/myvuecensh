@@ -101,7 +101,6 @@
               </span>
               <span class="subtotal right">已选商品
                 <span class="num checked-count">{{total}}</span>款
-                <span @click="upCount">商品数量变化</span>
             </span>
             </div> 
         </form>
@@ -150,7 +149,7 @@
                 //添加新属性cb=false
                 item.cb = false;
                 total += item.count;
-                sum += item.price;
+                sum += item.price*item.count;
             }
               //重新赋值给list
               this.list = rows; 
@@ -178,7 +177,6 @@
       },
       // 全删
       delmore(){
-        //console.log(5555555555)
         var id = "";
         for(var item of this.list){
           //console.log(item)
@@ -210,28 +208,52 @@
       },
       // 增加
       plus(){
-
-      },
-      // 减少
-      minus(e){
-        var lid = e.target.dataset.lid;
-        console.log(lid);
-        var url = "carts";
-        var obj={lid}
+        var lid = 11;
+        var url = "cartadd";
+        var obj = {lid}
         this.axios.get(url,{params:obj}).then(res=>{
-            console.log(res);
+            // if(res.data.code==-1){
+            //     //异步，所以要用回调函数
+            //     this.message = '请先登录';
+            //     this.showmsg = true;
+            //     this.$router.push("/login");
+            // }else 
             if(res.data.code==-3){
-                console.log("减少失败")
-            }else{
-                console.log("减少成功")
+                console.log("添加失败")
+            }else {
+                console.log("添加成功")
+                console.log(res.data)
+                this.$store.commit("updateTotal",this.total);
+                this.loadMore();
                 //http://127.0.0.1:8080/addcart?lid=1&lname=kk&price=9
                 
             }
         })
       },
-      upCount(){
-          this.$store.commit("updateTotal",this.total);
-        },
+      // 减少
+      minus(){
+        var lid = 11;
+        var url = "cartsub";
+        var obj = {lid}
+        this.axios.get(url,{params:obj}).then(res=>{
+            // if(res.data.code==-1){
+            //     //异步，所以要用回调函数
+            //     this.message = '请先登录';
+            //     this.showmsg = true;
+            //     this.$router.push("/login");
+            // }else 
+            if(res.data.code==-3){
+                console.log("减少失败")
+            }else {
+                console.log("减少成功")
+                console.log(res.data)
+                this.$store.commit("updateTotalSub",this.total);
+                this.loadMore();
+                //http://127.0.0.1:8080/addcart?lid=1&lname=kk&price=9
+                
+            }
+        })
+      },
       aaa(){
         //console.log(222)
       },

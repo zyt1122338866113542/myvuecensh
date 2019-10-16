@@ -311,41 +311,57 @@ server.get("/carts",(req,res)=>{
 
 
 //功能八：减少指定用户购物车信息
-server.get("/carts",(req,res)=>{
-  var lid = req.query.lid;
-  console.log(lid)
-  var uid=req.session.uid;
+server.get("/cartsub",(req,res)=>{
+    //2:判断当前用户是否登录成功
+  //  uid
+  //  如果uid为undefined 没登录
+  var uid = req.session.uid;
+  //console.log(uid)
   // if(!uid){
-  //   res.send({code:-1,msg:"请登录"});
+  //   res.send({code:-1,msg:"请先登录"});
   //   return;
   // }
-  var sql = `UPDATE censh_cart SET count=count-1 WHERE lid=${lid}`;
-  pool.query(sql,[lid],(err,result)=>{
-    if(err) throw err;
-    if(result.affectedRows>0){
-      res.send({code:2,msg:"商品减少成功"});
-     }else{
-      res.send({code:-3,msg:"减少失败"}); 
-     }
-  })
+  //3:获取客户端数据???小心处理
+  //  lid    商品编号
+    var lid = req.query.lid; 
+    var sql = "UPDATE censh_cart SET count=count-1 WHERE lid = ?";
+    //7:执行sql获取返回结果
+    pool.query(sql,[lid],(err,result)=>{
+      if(err) throw err;
+      console.log(result)
+      if(result.affectedRows>0){
+        res.send({code:2,msg:"商品减少成功",data:result});
+       }else{
+        res.send({code:-3,msg:"减少失败"}); 
+       }
+    })
 })
 //功能九：增加指定用户购物车信息
-server.get("/carts",(req,res)=>{
-  var lid = req.query.lid;
-  var uid=req.session.uid;
+server.get("/cartadd",(req,res)=>{
+  //2:判断当前用户是否登录成功
+  //  uid
+  //  如果uid为undefined 没登录
+  var uid = req.session.uid;
+  //console.log(uid)
   // if(!uid){
-  //   res.send({code:-1,msg:"请登录"});
+  //   res.send({code:-1,msg:"请先登录"});
   //   return;
   // }
-  pool.query(sql,[lid],(err,result)=>{
-    if(err) throw err;
-    if(result.affectedRows>0){
-      res.send({code:2,msg:"商品删除成功"});
-     }else{
-      res.send({code:-3,msg:"删除失败"}); 
-     }
+  //3:获取客户端数据???小心处理
+  //  lid    商品编号
+    var lid = req.query.lid; 
+    var sql = "UPDATE censh_cart SET count=count+1 WHERE lid = ?";
+    //7:执行sql获取返回结果
+    pool.query(sql,[lid],(err,result)=>{
+      if(err) throw err;
+      console.log(result)
+      if(result.affectedRows>0){
+        res.send({code:2,msg:"商品增加成功",data:result});
+       }else{
+        res.send({code:-3,msg:"增加失败"}); 
+       }
+    })
   })
-})
 //功能十：删除指定用户购物车信息
 server.get("/delcart",(req,res)=>{
   var uid = req.session.uid;

@@ -95,43 +95,44 @@
 				messagephone:"",
 				messagepwd:"",
 				messageerr:""
-      }
+     		}
 		},
 		methods:{
 			login(){
-					var uname=this.uname;
-					var upwd=this.upwd;
-					var reg=/^[a-z0-9]{3,12}$/i;
-					if(!reg.test(uname)){
-							this.show=true;
-							this.messagephone="用户名不能为空";
-							return;
+				var uname=this.uname;
+				var upwd=this.upwd;
+				var reg=/^[a-z0-9]{3,12}$/i;
+				if(!reg.test(uname)){
+						this.show=true;
+						this.messagephone="用户名不能为空";
+						return;
+				}
+				if(!reg.test(upwd)){
+						this.show=true;
+						this.messagepwd="密码不能为空";
+						return;
+				}
+				this.axios.get(
+					"Login",
+					{
+						params:{
+						uname,
+						upwd
+						}
 					}
-					if(!reg.test(upwd)){
+				).then(result=>{
+					if(result.data.code==1){
+							//成功，跳转
+							this.$router.push("/index");
+							this.$store.commit("updateUname",this.uname);
+					}else{
+							//失败，提示
 							this.show=true;
-							this.messagepwd="密码不能为空";
-							return;
+							this.messageerr = "登陆失败"
 					}
-					this.axios.get(
-							"Login",
-							{
-									params:{
-									uname,
-									upwd
-									}
-							}
-					).then(result=>{
-							if(result.data.code==1){
-									//成功，跳转
-									this.$router.push("/index")
-							}else{
-									//失败，提示
-									this.show=true;
-									this.messageerr = "登陆失败"
-							}
-							this.uname="";
-							this.upwd=""; 
-					})
+					this.uname="";
+					this.upwd=""; 
+				})
 			},
 			phonelogin(){
 				this.show=false;

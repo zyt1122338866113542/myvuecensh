@@ -4,7 +4,7 @@
         <div class="wrap">
             <div class="u1">
                 <ul>	
-                <li>欢迎光临盛时网</li>
+                <li>欢迎{{$store.getters.getUname}}光临盛时网</li>
                 <li>
                     <router-link to="Login">登录</router-link>
                 <li>
@@ -21,7 +21,7 @@
                     <li>
                         <router-link to="">我的盛时</router-link>
                     </li>
-                    <li><router-link to="">我的订单</router-link>
+                    <li><router-link to="/cart">我的订单</router-link>
                     </li>
             </ul>
             </div>
@@ -113,7 +113,8 @@ export default {
             list:[],    //保存服务器返回的牌子列表
             tabbarList:["全部品牌","选表购表","盛时奥莱","积分商城","定制&周边","海外产品","维修保养","线下门店","品牌馆","资讯","视频"],
             // 菜单导航的列表
-            kw:1  //利用双向绑定获得搜索文本框中用户输入的关键词
+            kw:1,  //利用双向绑定获得搜索文本框中用户输入的关键词
+            uname:''
         }
     },
     created() {

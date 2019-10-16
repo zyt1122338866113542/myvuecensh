@@ -34,11 +34,20 @@ Vue.use(Vuex)
 //创建存储对象
 var store = new Vuex.Store({
   state:{       //集中管理数据属性
-    total:0
+    total:0,
+    uname:''
   },
   mutations:{
     updateTotal(state,total){
-      state.total = total;
+      state.total += total;
+    },
+    updateTotalSub(state,total){
+      if(state.total>=0) {
+        state.total -= total;
+      }
+    },
+    updateUname(state,uname){
+      state.uname = uname;
     },
     clear(state){
       state.total = 0;
@@ -57,6 +66,9 @@ var store = new Vuex.Store({
   getters:{    //集中获取数据函数
     getTotal(state){  //特殊：所有函数都有参数
       return state.total;
+    },
+    getUname(state){  //特殊：所有函数都有参数
+      return state.uname;
     }
   }
 })
