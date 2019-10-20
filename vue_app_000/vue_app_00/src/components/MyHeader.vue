@@ -21,7 +21,7 @@
                     <li>
                         <router-link to="">我的盛时</router-link>
                     </li>
-                    <li><router-link to="/cart">我的订单</router-link>
+                    <li> <router-link to="/cart">我的订单</router-link> 
                     </li>
             </ul>
             </div>
@@ -55,7 +55,8 @@
                     <div class="swiper-container"></div>
                 </form>	
                 <a href="#" class="cart" onclick="point_click('购物车')">
-                    <i class="ccart-num">{{$store.getters.getTotal}}</i>
+                    <!-- <i class="ccart-num">{{$store.getters.getTotal}}</i> -->
+                    <i class="ccart-num">{{total}}</i>
                 </a>
             </div>
         </div>
@@ -114,7 +115,8 @@ export default {
             tabbarList:["全部品牌","选表购表","盛时奥莱","积分商城","定制&周边","海外产品","维修保养","线下门店","品牌馆","资讯","视频"],
             // 菜单导航的列表
             kw:1,  //利用双向绑定获得搜索文本框中用户输入的关键词
-            uname:''
+            uname:'',
+            total:0
         }
     },
     created() {
@@ -124,12 +126,34 @@ export default {
     },
     methods:{
         loadMore(){
+            
             // 1.创建url地址
             var url = "index";
             // 2.发送ajax请求
              this.axios.get(url).then(res=>{
                 //console.log(res);
                 this.list = res.data.data; 
+            })
+
+            var carturl = "carts";
+            this.axios.get(carturl).then(res=>{
+            
+            //获取服务器返回的数据
+            //this.list = res.data.data;
+            //添加一个新功能：为数据添加属性cb
+            //创建循环遍历数据
+            // console.log(res)
+            var rows = res.data.data;
+            var total = 0;
+            for(var item of rows){
+                total += item.count;
+            }
+                //重新赋值给list
+                // this.list = rows; 
+                this.total = total; 
+                // console.log(this.total)
+                // console.log(this.list)
+            
             })
         },
         // 搜索
@@ -143,6 +167,19 @@ export default {
                 this.kw=this.$route.params.kw;
             }
         }
+        //   jumptocart(){
+        //       console.log(123)
+        //     var url = "addcart";
+        //     this.axios.get(url).then(res=>{
+        //         console.log(res);
+        //         if(res.data.code==-1){
+        //             //请先登录
+        //             this.$router.push("/login");
+        //         }else{
+        //             this.$router.push("/cart");
+        //         }
+        //     })
+        //}
     
 //   data(){
 //     return {

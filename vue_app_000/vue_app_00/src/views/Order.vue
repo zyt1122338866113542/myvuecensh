@@ -290,12 +290,12 @@ export default {
             var obj={lid:mylid,lname:mylname,price:myprice}
             this.axios.get(url,{params:obj}).then(res=>{
                 console.log(res);
-                // if(res.data.code==-1){
-                //     //异步，所以要用回调函数
-                //     this.message = '请先登录';
-                //     this.showmsg = true;
-                //     this.$router.push("/login");
-                // }else 
+                if(res.data.code==-1){
+                    //异步，所以要用回调函数
+                    // this.message = '请先登录';
+                    // this.showmsg = true;
+                    this.$router.push("/login");
+                }else{ 
                 if(res.data.code==-2){
                     console.log("添加失败")
                 }else{
@@ -303,7 +303,7 @@ export default {
                     this.$store.commit("updateTotal",this.total);
                     //http://127.0.0.1:8080/addcart?lid=1&lname=kk&price=9
                     
-                }
+                }}
             })
         },
         jump(){

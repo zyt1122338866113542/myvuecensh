@@ -68,9 +68,9 @@ server.get("/login",(req,res)=>{
      //将用户id保存session对象中
      //uid当前登录：用户凭证
       req.session.uid = id;
-      // console.log(req.session);
+      console.log(req.session);
      res.send({code:1,msg:"登录成功"});
-      // console.log(result)
+      console.log(result)
    }
   });
 });
@@ -255,11 +255,11 @@ server.get("/addcart",(req,res)=>{
 //  uid
 //  如果uid为undefined 没登录
 var uid = req.session.uid;
-//console.log(uid)
-// if(!uid){
-//   res.send({code:-1,msg:"请先登录"});
-//   return;
-// }
+console.log(uid)
+if(!uid){
+  res.send({code:-1,msg:"请先登录"});
+  return;
+}
 //3:获取客户端数据???小心处理
 //  lid    商品编号
 //  price  商品价格
@@ -297,10 +297,10 @@ var uid = req.session.uid;
 //功能七：查询指定用户购物车信息
 server.get("/carts",(req,res)=>{
   var uid=req.session.uid;
-  // if(!uid){
-  //   res.send({code:-1,msg:"请登录"});
-  //   return;
-  // }
+  if(!uid){
+    res.send({code:-1,msg:"请登录"});
+    return;
+  }
   var sql="SELECT id,lid,lname,price,count FROM censh_cart ";
   pool.query(sql,[uid],(err,result)=>{
     if(err)throw err;
@@ -317,10 +317,10 @@ server.get("/cartsub",(req,res)=>{
   //  如果uid为undefined 没登录
   var uid = req.session.uid;
   //console.log(uid)
-  // if(!uid){
-  //   res.send({code:-1,msg:"请先登录"});
-  //   return;
-  // }
+  if(!uid){
+    res.send({code:-1,msg:"请先登录"});
+    return;
+  }
   //3:获取客户端数据???小心处理
   //  lid    商品编号
     var lid = req.query.lid; 
@@ -343,10 +343,10 @@ server.get("/cartadd",(req,res)=>{
   //  如果uid为undefined 没登录
   var uid = req.session.uid;
   //console.log(uid)
-  // if(!uid){
-  //   res.send({code:-1,msg:"请先登录"});
-  //   return;
-  // }
+  if(!uid){
+    res.send({code:-1,msg:"请先登录"});
+    return;
+  }
   //3:获取客户端数据???小心处理
   //  lid    商品编号
     var lid = req.query.lid; 
@@ -365,10 +365,10 @@ server.get("/cartadd",(req,res)=>{
 //功能十：删除指定用户购物车信息
 server.get("/delcart",(req,res)=>{
   var uid = req.session.uid;
-  // if(!uid){
-  //   res.send({code:-1,msg:"请先登录"});
-  //   return;
-  // }
+  if(!uid){
+    res.send({code:-1,msg:"请先登录"});
+    return;
+  }
   var id=req.query.id;
   var sql="DELETE FROM censh_cart WHERE id=?";
   pool.query(sql,[id],(err,result)=>{
@@ -384,10 +384,10 @@ server.get("/delcart",(req,res)=>{
 //功能11：删除多个指定用户购物车信息
 server.get("/delcarts",(req,res)=>{
   var uid = req.session.uid;
-  // if(!uid){
-  //   res.send({code:-1,msg:"请先登录"});
-  //   return;
-  // }
+  if(!uid){
+    res.send({code:-1,msg:"请先登录"});
+    return;
+  }
   var id=req.query.id;
   console.log(id)
   var sql=`DELETE FROM censh_cart  WHERE id IN (${id})`;

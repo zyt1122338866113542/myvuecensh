@@ -13,7 +13,9 @@ Vue.use(MintUi)
 import "./font/download/iconfont.css"
 
 Vue.config.productionTip = false
-axios.defaults.baseURL="http://localhost:8080";
+//配置请求时保存session信息
+axios.defaults.withCredentials=true
+axios.defaults.baseURL="http://localhost:8080/";
 Vue.prototype.axios=axios;
 Vue.component("my-header",MyHeader);
 Vue.component("my-footer",MyFooter);
@@ -41,11 +43,6 @@ var store = new Vuex.Store({
     updateTotal(state,total){
       state.total += total;
     },
-    updateTotalSub(state,total){
-      if(state.total>=0) {
-        state.total -= total;
-      }
-    },
     updateUname(state,uname){
       state.uname = uname;
     },
@@ -54,6 +51,10 @@ var store = new Vuex.Store({
     }
   },
   actions:{
+    load(){
+    
+    },
+
     //集中保存异步修改数据函数
     modifyCount:(context)=>{
       setTimeout(()=>{
