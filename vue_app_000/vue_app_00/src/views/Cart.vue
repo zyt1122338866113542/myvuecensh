@@ -1,3 +1,5 @@
+
+
 <template>
   <div>
     <my-header></my-header>
@@ -68,12 +70,14 @@
                         <span class="ff" id="minus" @click="minus" :data-lid="item.lid">-</span>
                         <!-- <input type="text" value="{{item.count}}" max="10" maxlength="4"> -->
                         <span class="count">{{item.count}}</span>
-                        <span class="ff" id="plus" @click="plus">+</span>
+                        <span class="ff" id="plus" @click="plus" :data-lid="item.lid">+</span>
                     </div>
                 </li>
                 <li class="field-sum">
                     <span class="item-subtotal" data-price="1499">
-                        ￥<span class="price1" id="price">{{item.price}}</span>
+                        ￥
+                        <span class="price1" id="price">{{item.price}}</span>
+                        <!-- <span class="price1" id="price">{{siglesum}}</span> -->
                     </span>
                 </li>
                 <li class="field-action">
@@ -101,7 +105,6 @@
               </span>
               <span class="subtotal right">已选商品
                 <span class="num checked-count">{{total}}</span>款
-                <!-- <span class="num checked-count">{{$store.getters.getTotal}}</span>款 -->
             </span>
             </div> 
         </form>
@@ -123,7 +126,8 @@
         price:5000,
         count:1,
         total:0,
-        sum:0
+        sum:0,
+        siglesum:0
       } 
     },
     //props:["mylid"],
@@ -142,20 +146,23 @@
             //this.list = res.data.data;
             //添加一个新功能：为数据添加属性cb
             //创建循环遍历数据
-            // console.log(res)
+            console.log(res)
             var rows = res.data.data;
             var total = 0;
             var sum = 0;
+            var siglesum = 0;
             for(var item of rows){
                 //添加新属性cb=false
                 item.cb = false;
                 total += item.count;
                 sum += item.price*item.count;
+                siglesum = item.price*item.count;
             }
               //重新赋值给list
               this.list = rows; 
               this.total = total; 
               this.sum = sum;
+              this.siglesum = siglesum;
               console.log(this.list)
           }
         })
@@ -208,52 +215,51 @@
         })    
       },
       // 增加
-      plus(){
-        var lid = 11;
+      plus(e){
+        var lid=e.target.dataset.lid;
         var url = "cartadd";
         var obj = {lid}
         this.axios.get(url,{params:obj}).then(res=>{
-            if(res.data.code==-1){
-                //异步，所以要用回调函数
-                this.message = '请先登录';
-                this.showmsg = true;
-                this.$router.push("/login");
-            }else {
+            // if(res.data.code==-1){
+            //     //异步，所以要用回调函数
+            //     this.message = '请先登录';
+            //     this.showmsg = true;
+            //     this.$router.push("/login");
+            // }else 
             if(res.data.code==-3){
                 console.log("添加失败")
             }else {
                 console.log("添加成功")
                 console.log(res.data)
                 this.$store.commit("updateTotal",this.total);
-    
                 this.loadMore();
                 //http://127.0.0.1:8080/addcart?lid=1&lname=kk&price=9
                 
-            }}
+            }
         })
       },
       // 减少
-      minus(){
-        var lid = 11;
+      minus(e){
+        var lid=e.target.dataset.lid;
         var url = "cartsub";
         var obj = {lid}
         this.axios.get(url,{params:obj}).then(res=>{
-            if(res.data.code==-1){
-                //异步，所以要用回调函数
-                this.message = '请先登录';
-                this.showmsg = true;
-                this.$router.push("/login");
-            }else{ 
+            // if(res.data.code==-1){
+            //     //异步，所以要用回调函数
+            //     this.message = '请先登录';
+            //     this.showmsg = true;
+            //     this.$router.push("/login");
+            // }else 
             if(res.data.code==-3){
                 console.log("减少失败")
             }else {
                 console.log("减少成功")
                 console.log(res.data)
-                // this.$store.commit("updateTotal",(-this.total));
+                this.$store.commit("updateTotalSub",this.total);
                 this.loadMore();
                 //http://127.0.0.1:8080/addcart?lid=1&lname=kk&price=9
                 
-            }}
+            }
         })
       },
       aaa(){

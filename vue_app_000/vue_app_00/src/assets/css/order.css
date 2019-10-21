@@ -390,7 +390,7 @@ main section.summary .summary-detail .content .detail-list-item.half {
 main section.summary .summary-detail .content .detail-button {
     margin-bottom: 20px;
 }
-main section.summary .summary-detail .content .detail-button .all-pay, main section.summary .summary-detail .content .detail-button .cart, main section.summary .summary-detail .content .detail-button .pay, main section.summary .summary-detail .content .detail-button .sold-out {
+main section.summary .summary-detail .content .detail-button .all-pay, main section.summary .summary-detail .content .detail-button .cart, main section.summary .summary-detail .content .detail-button .pay, main section.summary .summary-detail .content .detail-button .sold-out ,main section.summary .thumbanil .pay{
     background-color: #bea377;
 }
 main section.summary .summary-detail .content .detail-button .compare {

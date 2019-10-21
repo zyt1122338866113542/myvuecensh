@@ -33,9 +33,9 @@
                     </div>
                     <div class="thumbanil fl">
                         <ul class="clearfix" id="sm">
-                            <li v-for="(item,i) of pics[0]" :key="i" @click="changeone" >
+                            <li v-for="(item,i) of pics[0]" :key="i" @mouseover="changeone" @click="addcart">
                                 <img :src=" `http://127.0.0.1:8080/`+item.displayimg" alt=""
-                                    :data-id="item.lid">
+                                    :data-id="item.lid" :data-price="item.price" :data-lname="item.lname">
                             </li>
                         </ul>
                     </div> 
@@ -163,10 +163,7 @@
                         </div>
 
                         <div class="detail-button clearfix">
-                            <button type="button" class="pay fl add-cart-btn" data-sku="CSW00004M-CS" data-channel="1" data-cart_type="1" data-is_ajax="0"
-                            @click="addcart"
-                            >全额支付配送上门</button>
-                            <button @click="jump">跳转到购物车</button>
+                            <button @click="jump">查看购物车</button>
                             <span v-show="showmsg">{{message}}</span>
                             <!-- <button type="button" class="pay fl add-cart-btn" data-sku="CSW00004M-CS" data-channel="1" data-cart_type="1" data-is_ajax="0"
                             >全额支付配送上门</button> -->
@@ -195,9 +192,7 @@
                         </div>
                     </div>
                 </div>
-                </section>
-                
-                        
+                </section>          
             </main>
         </div>
         <my-footer></my-footer>
@@ -209,7 +204,7 @@ export default {
         return{
             breadcrumbs:["首页","表","浪琴","浪琴 Longines HERIAGE 经典复刻系列"],      //保存面包屑导航
             pics:[
-                {order_watch_id:1,displayimg:"",lname:"",price:""}
+                {order_watch_id:1,displayimg:"",lname:"",price:"",lid:""}
             ],                 //保存服务器返回的图片
             lilist:"江诗丹顿售后维修点如何查询?",
             i:1,
@@ -222,9 +217,6 @@ export default {
             price:0,
             alist:["石英","男款","时尚","浪琴"],
             total:1
-            
-
-            
         }
     },
     created() {
@@ -281,19 +273,16 @@ export default {
         showmytable(){
             this.showtable = !this.showtable;
         },
-        addcart(){
-            var mylid = 11;
-            var myprice = 1000;
-            var mylname = "ww";
-            console.log(mylid,myprice,mylname);
+        addcart(e){
+            var lid = e.target.dataset.id;
+            var price = e.target.dataset.price;
+            var lname = e.target.dataset.lname;
+            console.log('获取ID'+lid,price,lname)
             var url = "addcart";
-            var obj={lid:mylid,lname:mylname,price:myprice}
+            var obj={lid,lname,price}
             this.axios.get(url,{params:obj}).then(res=>{
                 console.log(res);
                 if(res.data.code==-1){
-                    //异步，所以要用回调函数
-                    // this.message = '请先登录';
-                    // this.showmsg = true;
                     this.$router.push("/login");
                 }else{ 
                 if(res.data.code==-2){

@@ -150,7 +150,7 @@ server.get("/longinesproduct",(req,res)=>{
 server.get("/order",(req,res)=>{
   var pics = [];
   // 展示图片
-  var sql1 = "SELECT lid,displayimg FROM censh_order_pic";
+  var sql1 = "SELECT lid,displayimg,price,lname FROM censh_order_pic";
   pool.query(sql1,(err,result)=>{
     if(err)throw err;
     if(result.length==0){
@@ -301,11 +301,11 @@ server.get("/carts",(req,res)=>{
     res.send({code:-1,msg:"请登录"});
     return;
   }
-  var sql="SELECT id,lid,lname,price,count FROM censh_cart ";
+  var sql="SELECT id,lid,lname,price,count FROM censh_cart";
   pool.query(sql,[uid],(err,result)=>{
     if(err)throw err;
     res.send({code:1,msg:"查询成功",data:result});
-    // console.log(result)
+    console.log(result)
   })
 })
 

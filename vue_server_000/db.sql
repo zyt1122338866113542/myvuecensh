@@ -287,13 +287,13 @@ INSERT INTO censh_order_pic VALUES
 (NULL, 1, 
 'image/order/9e238e44beb44f338a3ab6ceec185fc4X640.jpg',"浪琴",1000),
 (NULL, 2, 
-'image/order/LS4024AD背X640.jpg',"浪琴",1000),
+'image/order/LS4024AD背X640.jpg',"浪琴",2000),
 (NULL, 3, 
-'image/order/LS4024AD侧X640.jpg',"浪琴",1000),
+'image/order/LS4024AD侧X640.jpg',"浪琴",3000),
 (NULL, 4, 
-'image/order/LS4024AD扣X640.jpg',"浪琴",1000),
+'image/order/LS4024AD扣X640.jpg',"浪琴",1500),
 (NULL, 5, 
-'image/order/LS4024AD模X640.jpg',"浪琴",1000);
+'image/order/LS4024AD模X640.jpg',"浪琴",1200);
 
 
 (NULL, 6, "",
@@ -399,7 +399,8 @@ INSERT INTO censh_cart VALUES
 (NULL,1,1,1000,"浪琴",1),
 (NULL,2,1,2000,"浪琴",1),
 (NULL,3,2,3000,"浪琴",1),
-(NULL,4,2,4000,"宝玑",1);
+(NULL,4,2,4000,"宝玑",1),
+(NULL,5,2,4000,"宝玑",1);
 /*****购物车*******/
 CREATE TABLE censh_shoppingcart(
   lid INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
